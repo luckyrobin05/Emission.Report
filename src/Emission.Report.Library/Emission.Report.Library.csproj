@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{71B47987-76D6-4998-8786-6558F747014F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Emission.Report.Library</RootNamespace>
+    <AssemblyName>Emission.Report.Library</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.9.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.9.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Channels" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Topshelf, Version=4.2.1.215, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Topshelf.4.2.1\lib\net452\Topshelf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Calculate\ActualHeatRate\IActualHeatRateCalculator.cs" />
+    <Compile Include="Calculate\ActualHeatRate\CoalActualHeatRateCalculator.cs" />
+    <Compile Include="Calculate\Emissions\EmissionFactorRetriever.cs" />
+    <Compile Include="Calculate\Emissions\IEmissionFactorRetriever.cs" />
+    <Compile Include="Calculate\GenerationValue\IValueFactorRetriever.cs" />
+    <Compile Include="Calculate\GenerationValue\TotalGenerationValueCalculator.cs" />
+    <Compile Include="Calculate\GenerationValue\DailyGenerationValueCalculator.cs" />
+    <Compile Include="Calculate\GenerationValue\IDailyGenerationValueCalculator.cs" />
+    <Compile Include="Calculate\GenerationValue\ITotalGenerationValueCalculator.cs" />
+    <Compile Include="Calculate\Emissions\DailyEmissionValueCalculator.cs" />
+    <Compile Include="Calculate\Emissions\IDailyEmissionValueCalculator.cs" />
+    <Compile Include="Calculate\GenerationValue\ValueFactorRetriever.cs" />
+    <Compile Include="DependencyInjection\Bootstrapper.cs" />
+    <Compile Include="Enums\GeneratorType.cs" />
+    <Compile Include="FileOps\FileMover.cs" />
+    <Compile Include="FileOps\FileSerializerBuilder.cs" />
+    <Compile Include="FileOps\FolderWatcher.cs" />
+    <Compile Include="FileOps\IFileMover.cs" />
+    <Compile Include="FileOps\IFileSerializerBuilder.cs" />
+    <Compile Include="FileOps\IFolderWatcher.cs" />
+    <Compile Include="FileOps\JsonFileSerializer.cs" />
+    <Compile Include="Output\ActualHeatRatesOutput.cs" />
+    <Compile Include="Output\IActualHeatRatesOutput.cs" />
+    <Compile Include="Output\IMaxEmissionGeneratorsOutput.cs" />
+    <Compile Include="Output\IOutputReportCreator.cs" />
+    <Compile Include="Output\ITotalsOutput.cs" />
+    <Compile Include="Output\MaxEmissionGeneratorsOutput.cs" />
+    <Compile Include="Output\TotalsOutput.cs" />
+    <Compile Include="Process\IInputReportProcessor.cs" />
+    <Compile Include="Settings\ConfigSettings.cs" />
+    <Compile Include="Settings\Constants.cs" />
+    <Compile Include="Settings\IConfigSettings.cs" />
+    <Compile Include="Settings\IStartupParams.cs" />
+    <Compile Include="Settings\StartupParams.cs" />
+    <Compile Include="Job\ReportJob.cs" />
+    <Compile Include="Job\IReportJob.cs" />
+    <Compile Include="Output\OutputReportCreator.cs" />
+    <Compile Include="Process\InputReportProcessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FileOps\IFileSerializer.cs" />
+    <Compile Include="FileOps\XmlFileSerializer.cs" />
+    <Compile Include="Service\ReportService.cs" />
+    <Compile Include="Service\IReportService.cs" />
+    <Compile Include="Types\IInputData.cs" />
+    <Compile Include="Types\Serializable\Input\Interfaces\IEmissionGenerator.cs" />
+    <Compile Include="Types\Serializable\Input\Interfaces\IInputGenerator.cs" />
+    <Compile Include="Types\IOutputData.cs" />
+    <Compile Include="Types\Serializable\Output\Interfaces\IOutputGenerator.cs" />
+    <Compile Include="Types\Serializable\Input\Coal.cs" />
+    <Compile Include="Types\Serializable\Input\CoalGenerator.cs" />
+    <Compile Include="Types\Serializable\Input\Day.cs" />
+    <Compile Include="Types\Serializable\Input\Gas.cs" />
+    <Compile Include="Types\Serializable\Input\GasGenerator.cs" />
+    <Compile Include="Types\Serializable\Input\Generation.cs" />
+    <Compile Include="Types\Serializable\Input\GenerationReport.cs" />
+    <Compile Include="Types\Serializable\Input\Wind.cs" />
+    <Compile Include="Types\Serializable\Input\WindGenerator.cs" />
+    <Compile Include="Types\Serializable\Output\ActualHeatRates.cs" />
+    <Compile Include="Types\Serializable\Output\Day.cs" />
+    <Compile Include="Types\Serializable\Output\GenerationOutput.cs" />
+    <Compile Include="Types\Serializable\Output\Generator.cs" />
+    <Compile Include="Types\Serializable\Output\MaxEmissionGenerators.cs" />
+    <Compile Include="Types\Serializable\Output\Totals.cs" />
+    <Compile Include="Types\Serializable\Reference\EmissionsFactor.cs" />
+    <Compile Include="Types\Serializable\Reference\Factors.cs" />
+    <Compile Include="Types\Serializable\Reference\ReferenceData.cs" />
+    <Compile Include="Types\Serializable\Reference\ValueFactor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Emission.Report.Common\Emission.Report.Common.csproj">
+      <Project>{c555d68c-dd04-4072-927d-95e20a6db74f}</Project>
+      <Name>Emission.Report.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
