@@ -1,0 +1,43 @@
+Assumptions/NOTES:
+------------------
+I've developed the code on Visual Studio 2017 using the .Net Framework 4.6.2
+I've not added multiple environment setup for the build, assuming that this is to be run directly on PROD
+I've added basic test cases, but broken up the code so that the tests can be added as needed.
+
+NugetPackages Used:
+-------------------
+	1. Autofac - For dependency injection
+	2. Topshelf - To run the console in service mode if needed
+	3. log4net - To handle logging
+	4. Moq - To mock test objects
+	5. NDesk.Options - To handle input arguments for the console
+
+Log4Net
+-------
+Log4net should create a logs folder in the C drive in the machine where the code is executed under C:\Logs\Emission.Report\
+I've set the file folders as the following in the App.Config file:
+	Input folder - C:\Emissions\Input
+	Archive Folder for Input Files Processing Succeeded - C:\Emissions\Input\Success
+	Archive Folder for Input Files Processing Failed - C:\Emissions\Input\Failure
+	Output folder as C:\Emissions\Output
+	
+Input Arguments for the applications
+------------------------------------
+Default Values:
+---------------
+-r:false - will run the application as a console monitoring the input folder
+
+Additional Values:
+------------------
+-r:true - will run the application as a service, with a Web point exposed, which can be accessed via a web browser by typing:
+	NOTE: To run the code via Visual Studio/the exe via command prompt as a service, the command prompt window/visual studio window should be run in ADMIN mode, 
+	or as a user/account which has sufficient rights to create & run a service
+
+While running as a service, the Web Api exposed can be invoked locally as follows:	
+	http://localhost:8737/reportservice/process?format=XML&path=C:\Emissions\Input
+	NOTE 1: localhost can be replaced with the machine name to be accessed from a different machine.
+	NOTE 2: Input params are optional, and in case they are not provided, the code will fall back to default settings,
+	i.e. Xml for format and default config path. 
+	Path parameter can be used to input alternate paths for processing files after deployment, without altering the config
+	This path will be used during that specific web api call.
+	
